@@ -9,84 +9,61 @@
 </div>
 
 <script>
-  (function () {
-    if (window.__choiceModalInitialized) {
-      return;
-    }
+  (function() {
+    if (window.__choiceModalInitialized) return;
     window.__choiceModalInitialized = true;
 
-    var modal = document.getElementById('choice-modal');
-    var panel = modal ? modal.querySelector('.choice-modal__panel') : null;
-    var descriptionEl = modal ? modal.querySelector('.choice-modal__description') : null;
-    var actionsEl = modal ? modal.querySelector('.choice-modal__actions') : null;
+    const modal = document.getElementById('choice-modal');
+    const panel = modal?.querySelector('.choice-modal__panel');
+    const actions = modal?.querySelector('.choice-modal__actions');
+    if (!modal || !panel || !actions) return;
 
-    if (!modal || !panel || !descriptionEl || !actionsEl) {
-      return;
-    }
+    let activeTrigger = null;
 
-    var activeTrigger = null;
+    const renderChoices = (campusUrl, offcampusUrl) => {
+      actions.innerHTML = `
+        <a class="choice-modal__button choice-modal__button--blue" href="${campusUrl}">校内访问</a>
+        <a class="choice-modal__button choice-modal__button--green" href="${offcampusUrl}">校外访问</a>
+      `;
+    };
 
-    function renderChoices(campusUrl, offcampusUrl) {
-      actionsEl.innerHTML = '';
-
-      [
-        { label: '校内访问', url: campusUrl, className: 'choice-modal__button--blue' },
-        { label: '校外访问', url: offcampusUrl, className: 'choice-modal__button--green' }
-      ].forEach(function (choice) {
-        var link = document.createElement('a');
-        link.className = 'choice-modal__button ' + choice.className;
-        link.href = choice.url;
-        link.textContent = choice.label;
-        actionsEl.appendChild(link);
-      });
-    }
-
-    function openModal(trigger) {
-      var campusUrl = trigger.getAttribute('data-choice-modal-campus-url');
-      var offcampusUrl = trigger.getAttribute('data-choice-modal-offcampus-url');
-      if (!campusUrl || !offcampusUrl) {
-        return false;
-      }
+    const openModal = (trigger) => {
+      const campusUrl = trigger.dataset.choiceModalCampusUrl;
+      const offcampusUrl = trigger.dataset.choiceModalOffcampusUrl;
+      if (!campusUrl || !offcampusUrl) return false;
 
       activeTrigger = trigger;
-
       renderChoices(campusUrl, offcampusUrl);
-
       modal.hidden = false;
       document.body.classList.add('is-modal-open');
       panel.focus();
       return true;
-    }
+    };
 
-    function closeModal() {
+    const closeModal = () => {
       modal.hidden = true;
       document.body.classList.remove('is-modal-open');
-      actionsEl.innerHTML = '';
+      actions.innerHTML = '';
       if (activeTrigger) {
         activeTrigger.focus();
         activeTrigger = null;
       }
-    }
+    };
 
-    document.addEventListener('click', function (event) {
-      var trigger = event.target.closest('[data-choice-modal-open]');
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-choice-modal-open]');
       if (trigger) {
-        if (openModal(trigger)) {
-          event.preventDefault();
-        }
+        e.preventDefault();
+        openModal(trigger);
         return;
       }
-
-      if (event.target.closest('[data-choice-modal-close]')) {
-        closeModal();
-        return;
-      }
-    });
-
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape' && !modal.hidden) {
+      if (e.target.closest('[data-choice-modal-close]')) {
         closeModal();
       }
     });
-  }());
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.hidden) closeModal();
+    });
+  })();
 </script>
