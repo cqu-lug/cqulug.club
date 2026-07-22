@@ -6,19 +6,19 @@ locale                 : "zh-CN"
 title                  : "LUG @ CQU"
 title_separator        : "-"
 subtitle               : "Chongqing University Linux User Group"
-name                   : "CQU-LUG"
+name                   : "LUG @ CQU"
 description            : "重庆大学 Linux 用户协会"
 url                    : # "https://cqu-lug.github.io"
 baseurl                : # "/cqu-lug"
 repository             : # "username/repo-name"
-logo                   : "/assets/images/logo.svg"
+logo                   : "/assets/images/favicon.ico"
 breadcrumbs            : true
 search                 : true
 og_image               : /assets/images/splash-bg.svg
 
 # Site Author
 author:
-  name             : "CQU-LUG"
+  name             : "LUG @ CQU"
   bio              : "重庆大学 Linux 用户协会"
   location         : "重庆，中国"
   links:
@@ -50,6 +50,20 @@ defaults:
     values:
       layout: single
       author_profile: true
+  # _wiki
+  - scope:
+      path: "_wiki"
+      type: wiki
+    values:
+      layout: single
+      author_profile: false
+      read_time: false
+      comments: false
+      share: false
+      related: false
+      sidebar:
+        nav: "wiki"
+      breadcrumbs: true
 
 # Pagination
 paginate: 5
@@ -89,3 +103,9 @@ highlighter: rouge
 # Outputting
 permalink: /:year/:title/
 timezone: Asia/Shanghai
+
+# Collections for Wiki
+collections:
+  wiki:
+    output: true
+    permalink: /wiki/:path/

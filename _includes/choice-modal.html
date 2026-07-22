@@ -1,0 +1,92 @@
+<div class="choice-modal" id="choice-modal" hidden>
+  <div class="choice-modal__backdrop" data-choice-modal-close></div>
+  <div class="choice-modal__panel" role="dialog" aria-modal="true" aria-labelledby="choice-modal-title" tabindex="-1">
+    <h2 id="choice-modal-title">选择访问方式</h2>
+    <p class="choice-modal__description">请选择校内或校外访问。</p>
+    <div class="choice-modal__actions"></div>
+    <button class="choice-modal__close" type="button" data-choice-modal-close>取消</button>
+  </div>
+</div>
+
+<script>
+  (function () {
+    if (window.__choiceModalInitialized) {
+      return;
+    }
+    window.__choiceModalInitialized = true;
+
+    var modal = document.getElementById('choice-modal');
+    var panel = modal ? modal.querySelector('.choice-modal__panel') : null;
+    var descriptionEl = modal ? modal.querySelector('.choice-modal__description') : null;
+    var actionsEl = modal ? modal.querySelector('.choice-modal__actions') : null;
+
+    if (!modal || !panel || !descriptionEl || !actionsEl) {
+      return;
+    }
+
+    var activeTrigger = null;
+
+    function renderChoices(campusUrl, offcampusUrl) {
+      actionsEl.innerHTML = '';
+
+      [
+        { label: '校内访问', url: campusUrl, className: 'choice-modal__button--blue' },
+        { label: '校外访问', url: offcampusUrl, className: 'choice-modal__button--green' }
+      ].forEach(function (choice) {
+        var link = document.createElement('a');
+        link.className = 'choice-modal__button ' + choice.className;
+        link.href = choice.url;
+        link.textContent = choice.label;
+        actionsEl.appendChild(link);
+      });
+    }
+
+    function openModal(trigger) {
+      var campusUrl = trigger.getAttribute('data-choice-modal-campus-url');
+      var offcampusUrl = trigger.getAttribute('data-choice-modal-offcampus-url');
+      if (!campusUrl || !offcampusUrl) {
+        return false;
+      }
+
+      activeTrigger = trigger;
+
+      renderChoices(campusUrl, offcampusUrl);
+
+      modal.hidden = false;
+      document.body.classList.add('is-modal-open');
+      panel.focus();
+      return true;
+    }
+
+    function closeModal() {
+      modal.hidden = true;
+      document.body.classList.remove('is-modal-open');
+      actionsEl.innerHTML = '';
+      if (activeTrigger) {
+        activeTrigger.focus();
+        activeTrigger = null;
+      }
+    }
+
+    document.addEventListener('click', function (event) {
+      var trigger = event.target.closest('[data-choice-modal-open]');
+      if (trigger) {
+        if (openModal(trigger)) {
+          event.preventDefault();
+        }
+        return;
+      }
+
+      if (event.target.closest('[data-choice-modal-close]')) {
+        closeModal();
+        return;
+      }
+    });
+
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !modal.hidden) {
+        closeModal();
+      }
+    });
+  }());
+</script>

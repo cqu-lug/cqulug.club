@@ -3,8 +3,8 @@ layout: splash
 permalink: /
 header:
   overlay_color: "#0a4a83"
-  overlay_filter: "0.45"
-  overlay_image: /assets/images/splash-bg.svg
+  overlay_filter: "0.3"
+  overlay_image: /assets/images/bg.png
   actions:
     - label: "了解更多"
       url: "/about/"
@@ -15,50 +15,62 @@ excerpt: "重庆大学 Linux 用户协会"
   <div class="nav-left">
     <div class="link-group">
       <div class="link-group-row">
-        <a href="https://github.com/cqu-lug" class="bg-cqu-blue">
-          <i class="fab fa-github fa-5x" aria-hidden="true"></i>
-          <span>GitHub</span>
+        <a aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-blue"
+           data-choice-modal-open
+           data-choice-modal-campus-url="https://mirrors.cqu.edu.cn"
+           data-choice-modal-offcampus-url="https://mirrors-cqu-edu-cn.atrust.cqu.edu.cn">
+          <i class="fas fa-compact-disc fa-5x" aria-hidden="true"></i>
+          <span>开源软件镜像站</span>
         </a>
-        <a href="/wiki/" class="bg-cqu-teal">
-          <i class="fas fa-book fa-5x" aria-hidden="true"></i>
-          <span>Wiki</span>
+        <a aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-teal"
+           data-choice-modal-open
+           data-choice-modal-campus-url="http://lanunion.cqu.edu.cn"
+           data-choice-modal-offcampus-url="https://lanunion-cqu-edu-cn.atrust.cqu.edu.cn">
+          <i class="fas fa-table fa-5x" aria-hidden="true"></i>
+          <span>蓝盟官网（故障报修）</span>
         </a>
       </div>
       <div class="link-group-row">
-        <a href="/planet/" class="bg-cqu-orange">
-          <i class="fas fa-rss fa-5x" aria-hidden="true"></i>
-          <span>星球</span>
+        <a aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-orange"
+           data-choice-modal-open
+           data-choice-modal-campus-url="http://172.19.1.50"
+           data-choice-modal-offcampus-url="https://172-19-1-50.atrust.cqu.edu.cn">
+          <i class="fab fa-gitlab fa-5x" aria-hidden="true"></i>
+          <span>GitLab</span>
         </a>
-        <a href="/news/" class="bg-cqu-purple">
-          <i class="fas fa-newspaper fa-5x" aria-hidden="true"></i>
-          <span>新闻</span>
+        <a aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-purple"
+           data-choice-modal-open
+           data-choice-modal-campus-url="http://172.28.36.194:5666/"
+           data-choice-modal-offcampus-url="https://172-28-36-194-5666-p.atrust.cqu.edu.cn/">
+          <i class="fas fa-hard-drive fa-5x" aria-hidden="true"></i>
+          <span>蓝盟NAS</span>
         </a>
       </div>
     </div>
   </div>
   <div class="nav-right">
     <div class="description">
-      <p>重庆大学 Linux 用户协会是由重庆大学在校的 GNU/Linux 爱好者发起并组成的团体，旨在联合重大的 GNU/Linux 使用者，搭建信息交流共享的平台，宣传自由软件的价值，提高自由软件社区文化氛围，推广自由软件的应用。</p>
+      <p>LUG@CQU（Linux User Group at Chongqing University, 重庆大学 Linux 用户组）是由重庆大学自由/开源软件爱好者及 GNU/Linux 用户发起并建立的技术团体</p>
     </div>
     <div class="link-group">
       <div class="link-group-row">
-        <a href="/wiki/lug/events/calendar" class="fg-cqu-blue">
+        <a href="/activities" class="fg-cqu-blue">
           <i class="fas fa-calendar-alt fa-5x" aria-hidden="true"></i>
-          <span>活动日历</span>
+          <span>活动及服务</span>
         </a>
-        <a href="/wiki/lug/contact" class="fg-cqu-teal">
-          <i class="fas fa-comments fa-5x" aria-hidden="true"></i>
-          <span>联系我们</span>
+        <a href="/join" class="fg-cqu-teal">
+          <i class="fas fa-users fa-5x" aria-hidden="true"></i>
+          <span>加入我们</span>
         </a>
       </div>
       <div class="link-group-row">
-        <a href="/wiki/lug/services" class="fg-cqu-orange">
-          <i class="fas fa-thumbs-up fa-5x" aria-hidden="true"></i>
-          <span>更多服务</span>
+        <a href="/feed.xml" class="fg-cqu-orange">
+          <i class="fas fa-rss fa-5x" aria-hidden="true"></i>
+          <span>订阅我们</span>
         </a>
-        <a href="/wiki/lug/links" class="fg-cqu-purple">
+        <a href="https://lanunion.org" class="fg-cqu-purple">
           <i class="fas fa-link fa-5x" aria-hidden="true"></i>
-          <span>友情链接</span>
+          <span>友情链接（蓝盟介绍）</span>
         </a>
       </div>
     </div>
@@ -67,7 +79,7 @@ excerpt: "重庆大学 Linux 用户协会"
 
 <div class="archive-group">
   <div class="archive-group__item">
-    <h3 class="archive__subtitle"><a href="/news/">最新文章</a></h3>
+    <h3 class="archive__subtitle"><a href="/news/">LUG News</a></h3>
 
     {% for post in site.posts limit:5 %}
     <div class="list__item">
