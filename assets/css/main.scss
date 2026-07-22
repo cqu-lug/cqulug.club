@@ -1,0 +1,218 @@
+---
+# Only the main Sass file needs front matter
+---
+
+@import "minimal-mistakes/skins/default";
+@import "minimal-mistakes";
+
+/* CQU-LUG Hero Overlay */
+.page__hero--overlay .page__lead {
+  max-width: 880px;
+}
+
+.page__hero--overlay .btn--light-outline {
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.page__hero--overlay .btn--light-outline:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+/* CQU-LUG Navigation Grid */
+.lug-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.nav-left,
+.nav-right {
+  flex: 1 1 380px;
+  min-width: 320px;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.nav-right .description {
+  font-size: 0.95em;
+  line-height: 1.7;
+  color: #555;
+}
+
+.link-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.link-group-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.link-group-row a {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.75rem 1rem;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+  min-height: 110px;
+  font-weight: 500;
+}
+
+.link-group-row a:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+  color: #fff;
+  text-decoration: none;
+}
+
+.link-group-row a i {
+  margin-bottom: 0.5rem;
+}
+
+.link-group-row a span {
+  font-size: 0.95em;
+}
+
+/* Background color blocks */
+.bg-cqu-blue    { background: #0a4a83; }
+.bg-cqu-teal    { background: #168061; }
+.bg-cqu-orange  { background: #d45d00; }
+.bg-cqu-purple  { background: #6a2c70; }
+
+/* Foreground color blocks (outlined) */
+.fg-cqu-blue    { background: transparent; color: #0a4a83 !important; border: 2px solid #0a4a83; }
+.fg-cqu-teal    { background: transparent; color: #168061 !important; border: 2px solid #168061; }
+.fg-cqu-orange  { background: transparent; color: #d45d00 !important; border: 2px solid #d45d00; }
+.fg-cqu-purple  { background: transparent; color: #6a2c70 !important; border: 2px solid #6a2c70; }
+
+.fg-cqu-blue:hover   { background: #0a4a83; color: #fff !important; }
+.fg-cqu-teal:hover   { background: #168061; color: #fff !important; }
+.fg-cqu-orange:hover { background: #d45d00; color: #fff !important; }
+.fg-cqu-purple:hover { background: #6a2c70; color: #fff !important; }
+
+/* Archive group on homepage */
+.archive-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.archive-group__item {
+  flex: 1 1 100%;
+}
+
+.archive-group__item h3.archive__subtitle {
+  margin-top: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #0a4a83;
+}
+
+.archive-group__item h3.archive__subtitle a {
+  color: #0a4a83;
+  text-decoration: none;
+}
+
+/* Footer */
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.footer-block {
+  flex: 1 1 300px;
+}
+
+.footer__about {
+  font-size: 0.9em;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+.footer__extras {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+
+.footer__contact ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer__contact li {
+  margin-bottom: 0.4rem;
+}
+
+.footer__contact a {
+  color: inherit;
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.footer__contact a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer__logo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__logo-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .lug-nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .link-group-row {
+    flex-direction: column;
+  }
+
+  .footer-row {
+    flex-direction: column;
+  }
+
+  .footer__extras {
+    justify-content: flex-start;
+  }
+}

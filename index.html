@@ -1,0 +1,89 @@
+---
+layout: splash
+permalink: /
+header:
+  overlay_color: "#0a4a83"
+  overlay_filter: "0.45"
+  overlay_image: /assets/images/splash-bg.svg
+  actions:
+    - label: "了解更多"
+      url: "/about/"
+excerpt: "重庆大学 Linux 用户协会"
+---
+
+<nav class="lug-nav">
+  <div class="nav-left">
+    <div class="link-group">
+      <div class="link-group-row">
+        <a href="https://github.com/cqu-lug" class="bg-cqu-blue">
+          <i class="fab fa-github fa-5x" aria-hidden="true"></i>
+          <span>GitHub</span>
+        </a>
+        <a href="/wiki/" class="bg-cqu-teal">
+          <i class="fas fa-book fa-5x" aria-hidden="true"></i>
+          <span>Wiki</span>
+        </a>
+      </div>
+      <div class="link-group-row">
+        <a href="/planet/" class="bg-cqu-orange">
+          <i class="fas fa-rss fa-5x" aria-hidden="true"></i>
+          <span>星球</span>
+        </a>
+        <a href="/news/" class="bg-cqu-purple">
+          <i class="fas fa-newspaper fa-5x" aria-hidden="true"></i>
+          <span>新闻</span>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="description">
+      <p>重庆大学 Linux 用户协会是由重庆大学在校的 GNU/Linux 爱好者发起并组成的团体，旨在联合重大的 GNU/Linux 使用者，搭建信息交流共享的平台，宣传自由软件的价值，提高自由软件社区文化氛围，推广自由软件的应用。</p>
+    </div>
+    <div class="link-group">
+      <div class="link-group-row">
+        <a href="/wiki/lug/events/calendar" class="fg-cqu-blue">
+          <i class="fas fa-calendar-alt fa-5x" aria-hidden="true"></i>
+          <span>活动日历</span>
+        </a>
+        <a href="/wiki/lug/contact" class="fg-cqu-teal">
+          <i class="fas fa-comments fa-5x" aria-hidden="true"></i>
+          <span>联系我们</span>
+        </a>
+      </div>
+      <div class="link-group-row">
+        <a href="/wiki/lug/services" class="fg-cqu-orange">
+          <i class="fas fa-thumbs-up fa-5x" aria-hidden="true"></i>
+          <span>更多服务</span>
+        </a>
+        <a href="/wiki/lug/links" class="fg-cqu-purple">
+          <i class="fas fa-link fa-5x" aria-hidden="true"></i>
+          <span>友情链接</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="archive-group">
+  <div class="archive-group__item">
+    <h3 class="archive__subtitle"><a href="/news/">最新文章</a></h3>
+
+    {% for post in site.posts limit:5 %}
+    <div class="list__item">
+      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+        <h2 class="archive__item-title no_toc" itemprop="headline">
+          <a href="{{ post.url }}" rel="permalink">{{ post.title }}</a>
+        </h2>
+        <p class="page__meta">
+          <span class="page__meta-date">
+            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
+          </span>
+        </p>
+        <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+      </article>
+    </div>
+    {% endfor %}
+  </div>
+</div>

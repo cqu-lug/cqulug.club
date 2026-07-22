@@ -1,0 +1,8 @@
+# main links
+main:
+  - title: "Wiki"
+    url: /wiki/
+  - title: "新闻"
+    url: /news/
+  - title: "GitHub"
+    url: "https://github.com/cqu-lug"

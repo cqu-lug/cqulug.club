@@ -1,0 +1,91 @@
+theme                  : "minimal-mistakes-jekyll"
+minimal_mistakes_skin    : "default"
+
+# Site Settings
+locale                 : "zh-CN"
+title                  : "LUG @ CQU"
+title_separator        : "-"
+subtitle               : "Chongqing University Linux User Group"
+name                   : "CQU-LUG"
+description            : "重庆大学 Linux 用户协会"
+url                    : # "https://cqu-lug.github.io"
+baseurl                : # "/cqu-lug"
+repository             : # "username/repo-name"
+logo                   : "/assets/images/logo.svg"
+breadcrumbs            : true
+search                 : true
+og_image               : /assets/images/splash-bg.svg
+
+# Site Author
+author:
+  name             : "CQU-LUG"
+  bio              : "重庆大学 Linux 用户协会"
+  location         : "重庆，中国"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/cqu-lug"
+
+# Site Footer
+footer:
+  links:
+
+# Defaults
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: true
+      related: true
+  # _pages
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+# Pagination
+paginate: 5
+paginate_path: /news/page:num/
+
+# Plugins
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jekyll-include-cache
+
+# Archives
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+# Include
+include:
+  - _pages
+
+# Exclude
+exclude:
+  - vendor
+  - .bundle
+  - Gemfile
+  - Gemfile.lock
+
+# Conversion
+markdown: kramdown
+highlighter: rouge
+
+# Outputting
+permalink: /:year/:title/
+timezone: Asia/Shanghai
