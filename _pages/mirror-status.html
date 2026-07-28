@@ -94,8 +94,6 @@ permalink: /mirror-status/
     // 配置
     const MIRROR_API_URL = 'https://mirrors-metadata.cqulug.club/tunasync.json';
 
-    // 外部镜像站主机地址
-    const MIRROR_HOST = 'https://mirrors.cqu.edu.cn';
 
     // 状态映射
     const TAG_LIST = {
@@ -122,8 +120,8 @@ permalink: /mirror-status/
     // 获取镜像链接（外部链接）
     function getMirrorLink(name) {
       return name.endsWith('.git')
-              ? MIRROR_HOST + '/git/' + name + "/"
-              : MIRROR_HOST + '/' + name + '/';
+              ? '/git/' + name + "/"
+              : '/' + name + '/';
     }
 
     // 获取行样式类
@@ -159,7 +157,10 @@ permalink: /mirror-status/
         html += `
           <tr class="${rowClass}">
             <td>
-              <a class="mirror-href" href="${getMirrorLink(item.name)}" target="_blank" rel="noopener noreferrer">
+              <a href="http://mirrors.cqu.edu.cn${getMirrorLink(item.name)}"
+           data-choice-modal-open
+           data-choice-modal-campus-url=${"http://mirrors.cqu.edu.cn"+getMirrorLink(item.name)}
+           data-choice-modal-offcampus-url=${"https://lanunion-cqu-edu-cn.atrust.cqu.edu.cn"+getMirrorLink(item.name)}>
                 ${item.name}
               </a>
             </td>
