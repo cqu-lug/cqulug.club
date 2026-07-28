@@ -1,0 +1,225 @@
+---
+layout: default
+title: 镜像列表
+permalink: /mirror-status/
+---
+
+<style>
+
+  #mirror-list {
+    max-width: 100% !important;
+    padding: 20px !important;
+  }
+
+  #table-container {
+    padding: 0 15px !important;
+  }
+
+  .mirror-table {
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed;
+  }
+
+  /* 以下是原有的样式 */
+  .mirror-table .syncing-row {
+    background: #E3FFFD;
+  }
+
+  .mirror-table .error-row {
+    background: #ffd9cb;
+  }
+
+  .mirror-table .pending-row {
+    background: #FFF4E3;
+  }
+
+  .mirror-table .success-row {
+    background: #FFFFFF;
+  }
+  @media screen and (max-width: 768px) {
+    /* 隐藏表头的"上游"和"最后更新" */
+    .mirror-table thead th:nth-child(2),
+    .mirror-table thead th:nth-child(4) {
+      display: none;
+    }
+
+    /* 隐藏表格体的对应列 */
+    .mirror-table tbody td:nth-child(2),
+    .mirror-table tbody td:nth-child(4) {
+      display: none;
+    }
+
+    /* 调整剩余列的宽度 */
+    .mirror-table thead th:nth-child(1) { width: 40%; }  /* 名称 */
+    .mirror-table thead th:nth-child(3) { width: 30%; }  /* 大小 */
+    .mirror-table thead th:nth-child(5) { width: 30%; }  /* 状态 */
+  }
+</style>
+
+<div id="mirror-list">
+  <div class="mirror-header" style="text-align: center">
+    <h1><a href="https://mirrors.cqu.edu.cn" target="_blank" rel="noopener noreferrer">重庆大学开源软件镜像站</a> - 镜像同步状态</h1>
+    <span id="loading-indicator" style="display:none; margin-left: 15px; font-size: 14px; color: #909399;">
+      <i class="fas fa-spinner loading-spinner"></i> 加载中...
+    </span>
+  </div>
+
+  <div id="table-container">
+    <table class="mirror-table" id="mirror-table">
+      <thead>
+      <tr>
+        <th style="width:20%; min-width:120px;">镜像名称</th>
+        <th style="width:30%; min-width:150px;">上游</th>
+        <th style="width:12%; min-width:80px;">大小</th>
+        <th style="width:23%; min-width:140px;">最后更新</th>
+        <th style="width:15%; min-width:90px;">同步状态</th>
+      </tr>
+      </thead>
+      <tbody id="table-body">
+      <tr>
+        <td colspan="5" style="text-align:center; padding: 30px 0; color: #909399;">
+          <i class="fas fa-spinner loading-spinner"></i> 加载数据中...
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  (function() {
+    'use strict';
+
+    // 配置
+    const MIRROR_API_URL = 'https://mirrors-metadata.cqulug.club/tunasync.json';
+
+    // 外部镜像站主机地址
+    const MIRROR_HOST = 'https://mirrors.cqu.edu.cn';
+
+    // 状态映射
+    const TAG_LIST = {
+      'syncing': 'info',
+      'success': 'success',
+      'paused': 'warning',
+      'failed': 'danger',
+      'pre-syncing': 'info'
+    };
+
+    // 状态文本映射
+    const STATUS_TEXT = {
+      'syncing': '同步中',
+      'success': '成功',
+      'paused': '已暂停',
+      'failed': '失败',
+      'pre-syncing': '准备中'
+    };
+
+    // DOM 引用
+    const tableBody = document.getElementById('table-body');
+    const loadingIndicator = document.getElementById('loading-indicator');
+
+    // 获取镜像链接（外部链接）
+    function getMirrorLink(name) {
+      return name.endsWith('.git')
+              ? MIRROR_HOST + '/git/' + name + "/"
+              : MIRROR_HOST + '/' + name + '/';
+    }
+
+    // 获取行样式类
+    function getRowClassName(status) {
+      if (status === 'syncing') return 'syncing-row';
+      if (status === 'failed') return 'error-row';
+      if (status === 'paused') return 'pending-row';
+      return 'success-row';
+    }
+
+    // 渲染表格
+    function renderTable(data) {
+      if (!data || data.length === 0) {
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding: 30px 0; color: #909399;">
+              暂无数据
+            </td>
+          </tr>
+        `;
+        return;
+      }
+      let html = '';
+      data.forEach(function(item) {
+        const rowClass = getRowClassName(item.status);
+        const tagType = TAG_LIST[item.status] || 'info';
+        const statusText = STATUS_TEXT[item.status] || item.status;
+        const lastUpdate = (item.last_update || '-').replace(/ \+0800$/, '');
+        const size = item.size || '-';
+        const upstream = item.upstream || '-';
+        const upstreamDisplay = upstream !== '-' ? upstream : '-';
+
+        html += `
+          <tr class="${rowClass}">
+            <td>
+              <a class="mirror-href" href="${getMirrorLink(item.name)}" target="_blank" rel="noopener noreferrer">
+                ${item.name}
+              </a>
+            </td>
+            <td class="upstream-info">${upstream}</td>
+            <td class="size-info">${size}</td>
+            <td class="last-update">${lastUpdate}</td>
+            <td>
+              <span class="status-tag ${tagType}">${statusText}</span>
+            </td>
+          </tr>
+        `;
+      });
+
+      tableBody.innerHTML = html;
+    }
+
+    // 显示加载状态
+    function setLoading(loading) {
+      if (loading) {
+        loadingIndicator.style.display = 'inline';
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding: 30px 0; color: #909399;">
+              <i class="fas fa-spinner loading-spinner"></i> 加载数据中...
+            </td>
+          </tr>
+        `;
+      } else {
+        loadingIndicator.style.display = 'none';
+      }
+    }
+    // 获取数据
+    function fetchMirrorData() {
+      setLoading(true);
+      fetch(MIRROR_API_URL)
+              .then(res => res.ok ? res.json() : Promise.reject('Network error'))
+              .then(data => renderTable(data))
+              .catch(err => {
+                console.error('Error fetching mirror data:', err);
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:30px 0;color:#f56c6c;">
+        <i class="fas fa-exclamation-circle"></i> 加载数据失败，请稍后重试
+      </td></tr>`;
+              })
+              .finally(() => setLoading(false));
+    }
+
+    // 初始化
+    function init() {
+      fetchMirrorData();
+
+      // 定时刷新 (30秒)
+      setInterval(fetchMirrorData, 30000);
+    }
+
+    // 页面加载完成后初始化
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+
+  })();
+</script>
