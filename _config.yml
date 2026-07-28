@@ -56,13 +56,13 @@ defaults:
       type: wiki
     values:
       layout: single
-      author_profile: false
-      read_time: false
+      author_profile: true
+      read_time: true
       comments: false
-      share: false
-      related: false
-      sidebar:
-        nav: "wiki"
+      share: true
+      related: true
+#      sidebar:
+#        nav: "wiki"
       breadcrumbs: true
 
 # Pagination
