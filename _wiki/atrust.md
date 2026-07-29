@@ -1,5 +1,5 @@
 ---
-title: "重庆大学 Atrust VPN 使用指南"
+title: "重庆大学 Atrust VPN 使用指南（补充）"
 permalink: /wiki/atrust/
 categories:
   - Wiki
@@ -14,7 +14,7 @@ tags:
 
 {% include atrust-redirector.html %}
 
-##### 转换公式
+##### 链接转换公式
 `协议://主机名.域名:端口/路径`  
 →
 `https://主机名-域名-端口-p-协议后缀.atrust.cqu.edu.cn/路径`
@@ -38,4 +38,10 @@ tags:
 - https://mirrors.cqu.edu.cn -> https://mirrors-cqu-edu-cn-s.atrust.cqu.edu.cn
 - http://lanunion.cqu.edu.cn/about -> https://lanunion-cqu-edu-cn.atrust.cqu.edu.cn/about
 - http://10.10.8.162 -> https://10-10-8-162.atrust.cqu.edu.cn
+- https://[2001:da8:c800:1021::caca:18c] -> 无法转换！
 ```
+##### Tips
+- Atrust VPN 仅支持 HTTP/HTTPS 协议，其他协议（如 FTP、SSH 等）无法通过该服务访问。
+- Atrust VPN 仅支持校外访问，校内访问会被拦截。
+- Atrust VPN 支持 IPv4 和 IPv6 域名访问，但不支持纯 IPv6 地址访问。
+- 直接使用 Atrust VPN 首先会跳转登录，如需减少登录次数，可先下载客户端并开启服务，此后访问无需再次登录。

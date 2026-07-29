@@ -65,14 +65,18 @@
                 protocolSuffix = '-s';
             }
 
-            var vpnUrl = protocol + convertedHost + portSuffix + protocolSuffix + '.atrust.cqu.edu.cn' + pathPart;
+            var vpnUrl = 'https://' + convertedHost + portSuffix + protocolSuffix + '.atrust.cqu.edu.cn' + pathPart;
             return vpnUrl;
         }
 
         function generateVpn() {
             var raw = input.value;
             var vpnUrl = convertToVpnUrl(raw);
-
+            if (isIPv6Address(raw)) {
+                alert('不支持IPv6地址，请使用IPv4地址或域名');
+                resultArea.style.display = 'none';
+                return;
+            }
             if (vpnUrl === null) {
                 alert('请输入有效的地址');
                 resultArea.style.display = 'none';
@@ -83,6 +87,26 @@
             resultArea.style.display = 'block';
         }
 
+        function isIPv6Address(str) {
+            // 检测IPv6地址格式
+            var ipv6Pattern = /^\[([0-9a-fA-F:]+)\](?::(\d+))?$/;
+            // 检测纯IPv6地址格式（不带方括号）
+            var ipv6Pattern2 = /^([0-9a-fA-F:]+)$/;
+
+            // 先去除协议部分
+            var testStr = str;
+            if (/^https?:\/\//i.test(testStr)) {
+                testStr = testStr.replace(/^https?:\/\//i, '');
+            }
+
+            // 去掉路径部分
+            var slashIndex = testStr.indexOf('/');
+            if (slashIndex !== -1) {
+                testStr = testStr.substring(0, slashIndex);
+            }
+
+            return ipv6Pattern.test(testStr) || ipv6Pattern2.test(testStr);
+        }
         function jumpToVpn() {
             var url = vpnOutput.value;
             if (url) {
