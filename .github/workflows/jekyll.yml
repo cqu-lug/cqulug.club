@@ -2,8 +2,12 @@ name: Build and Deploy Jekyll Site
 
 on:
   push:
-    branches: [ main ]   # 触发分支，通常为 main 或 master
-  workflow_dispatch:     # 允许手动触发
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -20,14 +24,137 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '4.0'      # 根据需求调整
-          bundler-cache: true      # 自动缓存 bundle
-
-      - name: Install dependencies
-        run: bundle install
+          ruby-version: '4.0'
+          # ruby/setup-ruby installs the locked bundle once and caches it.
+          bundler-cache: true
 
       - name: Build Jekyll site
-        run: bundle exec jekyll build --destination ./_site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --strict --trace --destination ./_site
+
+      - name: Check generated HTML
+        env:
+          SITE_DIR: ./_site
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          import sys
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit
+
+          site_dir = Path(os.environ["SITE_DIR"])
+          html_files = sorted(site_dir.rglob("*.html"))
+          if not html_files:
+              print(f"No generated HTML files found in {site_dir}", file=sys.stderr)
+              sys.exit(1)
+
+          # These patterns identify Font Awesome CSS/font assets without
+          # rejecting unrelated prose that happens to contain the word "fa".
+          font_awesome = re.compile(
+              r"font[\s_-]*awesome|fontawesome-webfont|"
+              r"(?:cdnjs|use)\.cloudflare\.com/[^\s\"']*font-awesome",
+              re.IGNORECASE,
+          )
+          lunr_script = re.compile(r"(?:^|[/_.-])lunr(?:[/_.-]|$)", re.IGNORECASE)
+          legacy_main_script = re.compile(r"(?:^|/)main(?:\.min)?\.js(?:$|[?#])", re.IGNORECASE)
+          seo_names = {
+              "og:url",
+              "og:image",
+              "og:image:url",
+              "twitter:url",
+              "twitter:image",
+          }
+
+          class ArtifactParser(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.inline_handlers = []
+                  self.inline_styles = []
+                  self.lunr_scripts = []
+                  self.legacy_main_scripts = []
+                  self.style_tags = 0
+                  self.canonical = []
+                  self.seo_urls = []
+
+              def handle_starttag(self, tag, attrs):
+                  attrs = dict(attrs)
+                  tag_name = tag.lower()
+                  for name in attrs:
+                      if name.lower().startswith("on"):
+                          self.inline_handlers.append(name)
+                      if name.lower() == "style":
+                          self.inline_styles.append(tag_name)
+
+                  if tag_name == "script":
+                      src = attrs.get("src") or ""
+                      if lunr_script.search(src):
+                          self.lunr_scripts.append(src)
+                      if legacy_main_script.search(src):
+                          self.legacy_main_scripts.append(src)
+
+                  if tag_name == "style":
+                      self.style_tags += 1
+
+                  if tag_name == "link":
+                      rel = {
+                          value.lower()
+                          for value in (attrs.get("rel") or "").split()
+                      }
+                      if "canonical" in rel:
+                          self.canonical.append(attrs.get("href") or "")
+
+                  if tag_name == "meta":
+                      name = (attrs.get("property") or attrs.get("name") or "").lower()
+                      if name in seo_names:
+                          self.seo_urls.append((name, attrs.get("content") or ""))
+
+          def absolute_url(value):
+              parsed = urlsplit(value)
+              return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
+
+          errors = []
+          for html_file in html_files:
+              text = html_file.read_text(encoding="utf-8", errors="replace")
+              if font_awesome.search(text):
+                  errors.append(f"{html_file}: Font Awesome reference")
+
+              parser = ArtifactParser()
+              parser.feed(text)
+              for handler in parser.inline_handlers:
+                  errors.append(f"{html_file}: inline event handler {handler}")
+              for tag in parser.inline_styles:
+                  errors.append(f"{html_file}: inline style attribute on <{tag}>")
+              if parser.style_tags:
+                  errors.append(f"{html_file}: {parser.style_tags} inline <style> tag(s)")
+              for src in parser.lunr_scripts:
+                  errors.append(f"{html_file}: Lunr script in initial HTML ({src})")
+              for src in parser.legacy_main_scripts:
+                  errors.append(f"{html_file}: legacy main script in initial HTML ({src})")
+
+              if not parser.canonical:
+                  errors.append(f"{html_file}: missing canonical URL")
+              for value in parser.canonical:
+                  if not absolute_url(value):
+                      errors.append(f"{html_file}: non-absolute canonical URL ({value!r})")
+
+              if not any(name == "og:url" for name, _ in parser.seo_urls):
+                  errors.append(f"{html_file}: missing og:url")
+              for name, value in parser.seo_urls:
+                  if not absolute_url(value):
+                      errors.append(f"{html_file}: non-absolute {name} ({value!r})")
+
+          if errors:
+              print("Generated HTML checks failed:", file=sys.stderr)
+              print("\n".join(f"- {error}" for error in errors), file=sys.stderr)
+              sys.exit(1)
+
+          print(f"Checked {len(html_files)} generated HTML files")
+          print("No Font Awesome references, initial Lunr/main scripts, or inline handlers/styles found")
+          print("Canonical and og:url metadata use absolute URLs")
+          PY
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
