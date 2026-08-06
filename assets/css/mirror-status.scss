@@ -1,0 +1,115 @@
+.mirror-status-page {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: clamp(0.5rem, 2.5vw, 2rem);
+  box-sizing: border-box;
+}
+
+.mirror-header {
+  text-align: center;
+}
+
+.mirror-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.mirror-status-message {
+  min-height: 1.5rem;
+  margin: 0 0 0.75rem;
+  color: #59636e;
+}
+
+.mirror-retry {
+  min-height: 44px;
+  padding: 0.65rem 1rem;
+  border: 2px solid #0a4a83;
+  border-radius: 6px;
+  background: #fff;
+  color: #0a4a83;
+  cursor: pointer;
+  font: inherit;
+}
+
+.mirror-table-shell {
+  min-height: 1800px;
+}
+
+.mirror-table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
+}
+
+.mirror-table th,
+.mirror-table td {
+  overflow-wrap: anywhere;
+}
+
+.mirror-table .syncing-row { background: #e3fffd; }
+.mirror-table .error-row { background: #ffd9cb; }
+.mirror-table .pending-row { background: #fff4e3; }
+.mirror-table .success-row { background: #fff; }
+
+.status-tag {
+  display: inline-block;
+  min-width: 3.5em;
+  text-align: center;
+}
+
+.status-tag.info { color: #075985; }
+.status-tag.success { color: #166534; }
+.status-tag.warning { color: #92400e; }
+.status-tag.danger { color: #991b1b; }
+
+.skeleton-row td {
+  height: 34px;
+}
+
+.skeleton-row span {
+  display: block;
+  width: 72%;
+  height: 0.8rem;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #eef1f4 25%, #dfe5eb 50%, #eef1f4 75%);
+  background-size: 200% 100%;
+  animation: mirror-skeleton 1.4s ease-in-out infinite;
+}
+
+.mirror-error,
+.mirror-empty {
+  padding: 2rem 0 !important;
+  text-align: center;
+}
+
+.mirror-error { color: #991b1b; }
+.mirror-empty { color: #59636e; }
+
+@keyframes mirror-skeleton {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (max-width: 768px) {
+  .mirror-table-shell {
+    min-height: 2100px;
+  }
+
+  .mirror-table thead th:nth-child(2),
+  .mirror-table thead th:nth-child(4),
+  .mirror-table tbody td:nth-child(2),
+  .mirror-table tbody td:nth-child(4) {
+    display: none;
+  }
+
+  .mirror-table thead th:nth-child(1) { width: 40%; }
+  .mirror-table thead th:nth-child(3) { width: 30%; }
+  .mirror-table thead th:nth-child(5) { width: 30%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-row span {
+    animation: none;
+  }
+}

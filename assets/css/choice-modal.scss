@@ -17,6 +17,12 @@ body.is-modal-open {
   padding: 1.5rem;
 }
 
+.choice-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 
 .choice-modal__panel {
   position: relative;
@@ -86,6 +92,11 @@ body.is-modal-open {
   padding: 0.75rem 1rem;
   background: #f0f0f0;
   color: #333;
+}
+
+.choice-modal__button--blue,
+.choice-modal__button--green {
+  background: #0a4a83;
 }
 
 @media (max-width: 768px) {

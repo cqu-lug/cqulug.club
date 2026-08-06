@@ -1,0 +1,58 @@
+{%- assign icon_name = include.name | default: 'link' -%}
+<svg class="icon icon--{{ icon_name }}{% if include.class %} {{ include.class }}{% endif %}"
+     viewBox="0 0 24 24"
+     aria-hidden="true"
+     focusable="false"
+     xmlns="http://www.w3.org/2000/svg">
+  {% case icon_name %}
+    {% when 'compact-disc' %}
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="12" cy="12" r="5.75" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.8"/>
+      <circle cx="12" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path d="M16.1 5.3a8 8 0 0 1 2.6 2.6M5.3 16.1a8 8 0 0 0 2.6 2.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    {% when 'gitlab' %}
+      <path fill="currentColor" d="m23.6 9.59-.03-.09L20.3.98a.85.85 0 0 0-.34-.4.87.87 0 0 0-1.29.49l-2.2 6.75H7.54L5.33 1.07a.86.86 0 0 0-.29-.44.87.87 0 0 0-1.34.35L.43 9.5l-.03.09a6.07 6.07 0 0 0 2.01 7.01l.04.03 4.98 3.73 2.46 1.86 1.5 1.13a1 1 0 0 0 1.22 0l1.5-1.13 2.46-1.86 5.01-3.75.01-.01a6.07 6.07 0 0 0 2.01-7.01Z"/>
+    {% when 'github' %}
+      <path fill="currentColor" d="M12 .3C5.37.3 0 5.67 0 12.3c0 5.3 3.44 9.8 8.2 11.38.6.12.82-.26.82-.58 0-.28-.01-1.04-.02-2.04-3.33.72-4.04-1.61-4.04-1.61-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.76.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.47 5.92.42.36.81 1.1.81 2.22 0 1.61-.02 2.9-.02 3.29 0 .32.21.69.83.57A12 12 0 0 0 24 12.3C24 5.67 18.63.3 12 .3Z"/>
+    {% when 'calendar', 'calendar-alt' %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h14a2 2 0 0 1 2 2v13H3V6a2 2 0 0 1 2-2Zm-2 5h18M8 2v4m8-4v4M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/>
+    {% when 'users' %}
+      <path fill="currentColor" d="M5 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0Zm-2 14v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2H3Zm13-17.87a4 4 0 0 1 0 7.74A5.98 5.98 0 0 1 21 16v5h-2v-4a4 4 0 0 0-3-3.85 6 6 0 0 1 0-9.02Z"/>
+    {% when 'table' %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4zM4 9h16M10 4v16"/>
+    {% when 'circle-info' %}
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <path fill="currentColor" d="M11 10h2v7h-2zm0-3h2v2h-2z"/>
+    {% when 'link' %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m9 15 6-6m-4-3 .46-.54a5 5 0 0 1 7.08 7.08l-.54.46M13 18l-.4.53a5.07 5.07 0 0 1-7.13 0 4.97 4.97 0 0 1 0-7.07l.53-.46"/>
+    {% when 'rss', 'square-rss' %}
+      <path fill="currentColor" d="M4 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-2-7v3c4.97 0 9 4.03 9 9h3c0-6.63-5.37-12-12-12Zm0-7v3c8.84 0 16 7.16 16 16h3C21 13.4 13.6 4 2 4Z"/>
+    {% when 'address-card' %}
+      <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
+      <circle cx="8" cy="11" r="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M5.5 16a2.5 2.5 0 0 1 5 0M13 10h5M13 14h4"/>
+    {% when 'search' %}
+      <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m16 16 5 5"/>
+    {% when 'spinner' %}
+      <circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="18 36"/>
+    {% when 'exclamation-circle' %}
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="currentColor" d="M11 7h2v6h-2zm0 8h2v2h-2z"/>
+    {% when 'tags' %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="m4 5 7-2 9 9-7 7-9-9V5Zm3 3h.01"/>
+    {% when 'folder-open' %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 7h7l2 2h9l-2 10H5L3 7Zm0 0V5h6l2 2"/>
+    {% when 'clock' %}
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M12 7v5l3 2"/>
+    {% when 'location-dot' %}
+      <path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5Z"/>
+    {% when 'x-twitter' %}
+      <path fill="currentColor" d="m14.23 10.16 8.74-10.16H20.9l-7.59 8.82L7.25 0H.26l9.17 13.34L.26 24h2.07l8.02-9.32L16.75 24h6.99L14.23 10.16Zm-2.84 3.3-.93-1.33L3.08 1.56h3.18l5.97 8.53.93 1.33 7.75 11.09h-3.18l-6.34-9.05Z"/>
+    {% when 'facebook' %}
+      <path fill="currentColor" d="M9.1 23.7v-7.98H6.63v-3.67H9.1v-1.58c0-4.09 1.85-5.98 5.86-5.98.4 0 .95.04 1.47.1v3.33h-.65c-1.42 0-2.06.67-2.06 2.05v1.3h3.92l-.67 3.67h-3.25v8.24A12 12 0 1 0 9.1 23.7Z"/>
+    {% when 'linkedin' %}
+      <path fill="currentColor" d="M4.2 3.2a2.2 2.2 0 1 1 0 4.4 2.2 2.2 0 0 1 0-4.4ZM2.3 9h3.8v12H2.3V9Zm6.1 0h3.6v1.64h.05c.5-.95 1.72-1.95 3.55-1.95 3.8 0 4.5 2.5 4.5 5.75V21h-3.8v-5.82c0-1.39-.03-3.18-1.94-3.18-1.94 0-2.24 1.51-2.24 3.08V21H8.4V9Z"/>
+    {% when 'bluesky' %}
+      <path fill="currentColor" d="M5.2 2.86C7.95 4.92 10.91 9.11 12 11.36c1.09-2.25 4.05-6.44 6.8-8.5C20.78 1.37 24 .21 24 3.88c0 .73-.42 6.16-.67 7.04-.86 3.06-3.98 3.84-6.75 3.37 4.85.83 6.09 3.56 3.42 6.3-5.07 5.2-7.28-1.3-7.85-2.97-.1-.3-.15-.45-.15-.33 0-.12-.05.02-.15.33-.57 1.67-2.78 8.17-7.85 2.97-2.67-2.74-1.43-5.47 3.42-6.3-2.78.47-5.9-.31-6.76-3.37C.42 10.04 0 4.62 0 3.88c0-3.67 3.22-2.52 5.2-1.02Z"/>
+    {% else %}
+      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M5 12h14M12 5v14"/>
+  {% endcase %}
+</svg>

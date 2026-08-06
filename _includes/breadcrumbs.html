@@ -1,0 +1,25 @@
+{% assign locale = include.locale | default: site.locale %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    {% assign crumbs = page.url | split: '/' %}
+    {% assign position = 1 %}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ '/' | relative_url }}" itemprop="item"><span itemprop="name">{{ site.data.ui-text[locale].breadcrumb_home_label | default: "Home" }}</span></a>
+      <meta itemprop="position" content="{{ position }}">
+    </li>
+    {% unless page.collection == 'posts' %}
+      {% capture crumb_path %}/{% endcapture %}
+      {% for crumb in crumbs offset: 1 %}
+        {% unless forloop.last %}
+          {% assign position = position | plus: 1 %}
+          {% capture crumb_path %}{{ crumb_path }}{{ crumb | downcase | replace: '%20', '-' }}/{% endcapture %}
+          <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+            <a href="{{ crumb_path | relative_url }}" itemprop="item"><span itemprop="name">{{ crumb | url_decode | replace: '-', ' ' | capitalize }}</span></a>
+            <meta itemprop="position" content="{{ position }}">
+          </li>
+        {% endunless %}
+      {% endfor %}
+    {% endunless %}
+    <li class="current"{% if page.locale %} lang="{{ page.locale }}"{% endif %}>{{ page.title }}</li>
+  </ol>
+</nav>

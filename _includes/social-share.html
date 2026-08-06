@@ -1,0 +1,8 @@
+{% assign locale = include.locale | default: site.locale %}
+<section class="page__share">
+  <h4 class="page__share-title">{{ site.data.ui-text[locale].share_on_label | default: "分享到" }}</h4>
+  <a href="https://x.com/intent/tweet?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" class="btn btn--x" aria-label="分享到 X" data-share-popup title="分享到 X">{% include icon.html name="x-twitter" %}<span> X</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" class="btn btn--facebook" aria-label="分享到 Facebook" data-share-popup title="分享到 Facebook">{% include icon.html name="facebook" %}<span> Facebook</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ page.url | absolute_url }}" class="btn btn--linkedin" aria-label="分享到 LinkedIn" data-share-popup title="分享到 LinkedIn">{% include icon.html name="linkedin" %}<span> LinkedIn</span></a>
+  <a href="https://bsky.app/intent/compose?text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" class="btn btn--bluesky" aria-label="分享到 Bluesky" data-share-popup title="分享到 Bluesky">{% include icon.html name="bluesky" %}<span> Bluesky</span></a>
+</section>

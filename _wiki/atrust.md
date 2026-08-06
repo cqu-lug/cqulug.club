@@ -6,6 +6,7 @@ categories:
 tags:
   - Wiki
   - VPN
+atrust_redirector: true
 ---
 
 > Atrust VPN 是重庆大学为校内师生提供的访问校内资源的服务，主要用于在校外访问校内网络资源，详细信息请查看[信息办官网介绍](https://net.cqu.edu.cn/info/1015/2899.htm)
@@ -22,14 +23,19 @@ tags:
 ##### 转换示例
 `https://login.cqu.edu.cn:802/eportal`
 
-| 步骤 | 操作                          | 结果 |
-|------|-------------------------------|------|
-| 1 | Atrust VPN 必须为 HTTPS       | `https://` |
-| 2 | 主机名中的 `.` 替换为 `-`     | `login-cqu-edu-cn` |
-| 3 | 端口号前加 `-`，后加 `-p`     | `-802-p` |
-| 4 | 如为 HTTPS 协议，加 `-s` 后缀 | `-s` |
-| 5 | 拼接 VPN 域名                 | `.atrust.cqu.edu.cn` |
-| 6 | 保留原路径                    | `/eportal` |
+<table>
+  <thead>
+    <tr><th scope="col">步骤</th><th scope="col">操作</th><th scope="col">结果</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Atrust VPN 必须为 HTTPS</td><td><code>https://</code></td></tr>
+    <tr><td>2</td><td>主机名中的 <code>.</code> 替换为 <code>-</code></td><td><code>login-cqu-edu-cn</code></td></tr>
+    <tr><td>3</td><td>端口号前加 <code>-</code>，后加 <code>-p</code></td><td><code>-802-p</code></td></tr>
+    <tr><td>4</td><td>如为 HTTPS 协议，加 <code>-s</code> 后缀</td><td><code>-s</code></td></tr>
+    <tr><td>5</td><td>拼接 VPN 域名</td><td><code>.atrust.cqu.edu.cn</code></td></tr>
+    <tr><td>6</td><td>保留原路径</td><td><code>/eportal</code></td></tr>
+  </tbody>
+</table>
 
 `https://login-cqu-edu-cn-802-p-s.atrust.cqu.edu.cn/eportal`
 

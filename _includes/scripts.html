@@ -1,0 +1,9 @@
+{% assign locale = include.locale | default: site.locale %}
+<script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/choice-modal.js' | relative_url }}" defer></script>
+{% if page.mirror_status %}
+  <script src="{{ '/assets/js/mirror-status.js' | relative_url }}" defer></script>
+{% endif %}
+{% if page.atrust_redirector %}
+  <script src="{{ '/assets/js/atrust-redirector.js' | relative_url }}" defer></script>
+{% endif %}

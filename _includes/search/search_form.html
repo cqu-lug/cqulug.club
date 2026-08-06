@@ -1,0 +1,10 @@
+{% assign locale = include.locale | default: site.locale %}
+<div class="search-content__inner-wrap">
+  <div class="search-content__form" role="search">
+    <label class="sr-only" for="search">
+      {{ site.data.ui-text[locale].search_label_text | default: '输入您要搜索的关键词...' }}
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="{{ site.data.ui-text[locale].search_placeholder_text | default: '输入您要搜索的关键词...' }}" autocomplete="off" />
+  </div>
+  <div id="results" class="results" aria-live="polite"></div>
+</div>

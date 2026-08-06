@@ -4,66 +4,6 @@
     <h2 id="choice-modal-title">选择访问方式</h2>
     <p class="choice-modal__description">请选择校内或校外访问。</p>
     <div class="choice-modal__actions"></div>
-    <button class="choice-modal__close" type="button" data-choice-modal-close>取消</button>
+    <button class="choice-modal__close" type="button" data-choice-modal-close aria-label="关闭访问方式选择">取消</button>
   </div>
 </div>
-
-<script>
-  (function() {
-    if (window.__choiceModalInitialized) return;
-    window.__choiceModalInitialized = true;
-
-    const modal = document.getElementById('choice-modal');
-    const panel = modal?.querySelector('.choice-modal__panel');
-    const actions = modal?.querySelector('.choice-modal__actions');
-    if (!modal || !panel || !actions) return;
-
-    let activeTrigger = null;
-
-    const renderChoices = (campusUrl, offcampusUrl) => {
-      actions.innerHTML = `
-        <a class="choice-modal__button choice-modal__button--blue" href="${campusUrl}">校内访问</a>
-        <a class="choice-modal__button choice-modal__button--green" href="${offcampusUrl}">校外访问</a>
-      `;
-    };
-
-    const openModal = (trigger) => {
-      const campusUrl = trigger.dataset.choiceModalCampusUrl;
-      const offcampusUrl = trigger.dataset.choiceModalOffcampusUrl;
-      if (!campusUrl || !offcampusUrl) return false;
-
-      activeTrigger = trigger;
-      renderChoices(campusUrl, offcampusUrl);
-      modal.hidden = false;
-      document.body.classList.add('is-modal-open');
-      panel.focus();
-      return true;
-    };
-
-    const closeModal = () => {
-      modal.hidden = true;
-      document.body.classList.remove('is-modal-open');
-      actions.innerHTML = '';
-      if (activeTrigger) {
-        activeTrigger.focus();
-        activeTrigger = null;
-      }
-    };
-
-    document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('[data-choice-modal-open]');
-      if (trigger) {
-        e.preventDefault();
-        openModal(trigger);
-        return;
-      }
-      if (e.target.closest('[data-choice-modal-close]')) {
-        closeModal();
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !modal.hidden) closeModal();
-    });
-  })();
-</script>
