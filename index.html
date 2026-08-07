@@ -12,71 +12,68 @@ excerpt: "重庆大学 Linux 用户协会"
 ---
 
 <nav class="lug-nav" aria-label="站点服务与资源">
-  <div class="nav-left">
-    <div class="link-group">
-      <div class="link-group-row">
-        <button type="button" aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-blue"
-                data-choice-modal-open
-                data-choice-modal-campus-url="https://mirrors.cqu.edu.cn"
-                data-choice-modal-offcampus-url="https://mirrors-cqu-edu-cn.atrust.cqu.edu.cn">
-          {% include icon.html name="compact-disc" class="icon--hero" %}
-          <span>开源软件镜像站</span>
-        </button>
-      </div>
-      <div class="link-group-row">
-        <button type="button" aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-orange"
-                data-choice-modal-open
-                data-choice-modal-campus-url="http://172.19.1.50"
-                data-choice-modal-offcampus-url="https://172-19-1-50.atrust.cqu.edu.cn">
-          {% include icon.html name="gitlab" class="icon--hero" %}
-          <span>GitLab</span>
-        </button>
-        <button type="button" aria-haspopup="dialog" aria-controls="choice-modal" class="bg-cqu-teal"
-                data-choice-modal-open
-                data-choice-modal-campus-url="http://lanunion.cqu.edu.cn"
-                data-choice-modal-offcampus-url="https://lanunion-cqu-edu-cn.atrust.cqu.edu.cn">
-          {% include icon.html name="table" class="icon--hero" %}
-          <span>蓝盟官网（故障报修）</span>
-        </button>
-      </div>
+  <section class="nav-left" aria-labelledby="services-title">
+    <header class="home-section__header">
+      <p class="home-section__eyebrow">CQU LUG SERVICES</p>
+      <h2 id="services-title">常用服务</h2>
+    </header>
+    <div class="service-grid">
+      <button type="button" aria-haspopup="dialog" aria-controls="choice-modal" aria-expanded="false" class="bg-cqu-blue"
+              data-choice-modal-open
+              data-choice-modal-campus-url="https://mirrors.cqu.edu.cn"
+              data-choice-modal-offcampus-url="https://mirrors-cqu-edu-cn.atrust.cqu.edu.cn">
+        {% include icon.html name="compact-disc" class="icon--hero" %}
+        <span>开源软件镜像站</span>
+      </button>
+      <button type="button" aria-haspopup="dialog" aria-controls="choice-modal" aria-expanded="false" class="bg-cqu-teal"
+              data-choice-modal-open
+              data-choice-modal-campus-url="http://lanunion.cqu.edu.cn"
+              data-choice-modal-offcampus-url="https://lanunion-cqu-edu-cn.atrust.cqu.edu.cn">
+        {% include icon.html name="maintenance" class="icon--hero" %}
+        <span>蓝盟官网（故障报修）</span>
+      </button>
     </div>
-  </div>
-  <div class="nav-right">
+  </section>
+  <section class="nav-right" aria-labelledby="resources-title">
     <div class="description">
-      <p>LUG@CQU（Linux User Group at Chongqing University, 重庆大学 Linux 用户组）是由重庆大学自由/开源软件爱好者及 GNU/Linux 用户发起并建立的技术团体</p>
+      <p class="home-section__eyebrow">OPEN SOURCE · COMMUNITY · SHARING</p>
+      <h2 id="resources-title">LUG @ CQU</h2>
+      <p>LUG@CQU（Linux User Group at Chongqing University，重庆大学 Linux 用户组）是由重庆大学自由/开源软件爱好者及 GNU/Linux 用户发起并建立的技术团体。</p>
     </div>
-    <div class="link-group">
-      <div class="link-group-row">
-        <a href="/activities/" class="fg-cqu-blue">
-          {% include icon.html name="calendar" class="icon--hero" %}
-          <span>活动及服务</span>
-        </a>
-        <a href="/join/" class="fg-cqu-teal">
-          {% include icon.html name="users" class="icon--hero" %}
-          <span>加入我们</span>
-        </a>
-      </div>
-      <div class="link-group-row">
-        <a href="/mirror-status/" class="fg-cqu-purple">
-          {% include icon.html name="circle-info" class="icon--hero" %}
-          <span>镜像站同步情况</span>
-        </a>
-        <a href="https://lanunion.tano.asia" class="fg-cqu-orange">
-          {% include icon.html name="link" class="icon--hero" %}
-          <span>友情链接（蓝盟介绍）</span>
-        </a>
-      </div>
+    <div class="resource-grid">
+      <a href="/activities/" class="fg-cqu-blue">
+        {% include icon.html name="activities" class="icon--hero" %}
+        <span>活动及服务</span>
+      </a>
+      <a href="/join/" class="fg-cqu-teal">
+        {% include icon.html name="users" class="icon--hero" %}
+        <span>加入我们</span>
+      </a>
+      <a href="/mirror-status/" class="fg-cqu-purple">
+        {% include icon.html name="circle-info" class="icon--hero" %}
+        <span>镜像站同步情况</span>
+      </a>
+      <a href="https://lanunion.tano.asia" class="fg-cqu-orange">
+        {% include icon.html name="link" class="icon--hero" %}
+        <span>友情链接（蓝盟介绍）</span>
+      </a>
     </div>
-  </div>
+  </section>
 </nav>
 
 <div class="archive-group">
   <div class="archive-group__item">
-    <h3 class="archive__subtitle"><a href="/news/">LUG News</a></h3>
+    <header class="home-news__header">
+      <div>
+        <p class="home-section__eyebrow">LATEST UPDATES</p>
+        <h2 class="archive__subtitle"><a href="/news/">LUG News</a></h2>
+      </div>
+      <a class="home-news__more" href="/news/">查看全部新闻<span aria-hidden="true">→</span></a>
+    </header>
 
     {% for post in site.posts limit:5 %}
     <div class="list__item">
-      <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+      <article class="archive__item archive__item--home{% if forloop.first %} archive__item--featured{% endif %}" itemscope itemtype="https://schema.org/CreativeWork">
         <h2 class="archive__item-title no_toc" itemprop="headline">
           <a href="{{ post.url }}" rel="permalink">{{ post.title }}</a>
         </h2>
@@ -85,8 +82,9 @@ excerpt: "重庆大学 Linux 用户协会"
             {% include icon.html name="calendar" %}
             <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y 年 %-m 月 %-d 日" }}</time>
           </span>
+          {% if post.categories.size > 0 %}<span class="home-news__category">{{ post.categories | first }}</span>{% endif %}
         </p>
-        <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        <p class="archive__item-excerpt" itemprop="description">{{ post.excerpt | strip_html | truncate: 110 }}</p>
       </article>
     </div>
     {% endfor %}

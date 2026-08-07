@@ -182,9 +182,45 @@
     });
   }
 
+  function setupCurrentYear() {
+    var year = new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      timeZone: 'Asia/Shanghai'
+    }).format(new Date());
+    document.querySelectorAll('[data-current-year]').forEach(function (element) {
+      element.dateTime = year;
+      element.textContent = year;
+    });
+  }
+
+  function setupPageLoader() {
+    function markPageReady() {
+      window.requestAnimationFrame(function () {
+        document.body.classList.add('is-page-ready');
+      });
+    }
+
+    document.addEventListener('click', function (event) {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      var link = event.target.closest('a[href]');
+      if (!link || link.target || link.hasAttribute('download')) return;
+
+      var destination = new URL(link.href, window.location.href);
+      var isSameDocument = destination.pathname === window.location.pathname && destination.search === window.location.search;
+      if (destination.origin !== window.location.origin || isSameDocument) return;
+
+      document.body.classList.remove('is-page-ready');
+    });
+
+    window.addEventListener('pageshow', markPageReady);
+    markPageReady();
+  }
+
   setupGreedyNavigation();
   setupSearch();
   setupAuthorProfile();
   setupHeaderLinks();
   setupShareLinks();
+  setupCurrentYear();
+  setupPageLoader();
 }());

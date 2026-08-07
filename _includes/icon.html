@@ -1,30 +1,43 @@
 {%- assign icon_name = include.name | default: 'link' -%}
 <svg class="icon icon--{{ icon_name }}{% if include.class %} {{ include.class }}{% endif %}"
-     viewBox="0 0 24 24"
+     viewBox="{% if icon_name == 'users' %}0 0 15 16{% else %}0 0 24 24{% endif %}"
      aria-hidden="true"
      focusable="false"
      xmlns="http://www.w3.org/2000/svg">
   {% case icon_name %}
     {% when 'compact-disc' %}
-      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <circle cx="12" cy="12" r="5.75" fill="none" stroke="currentColor" stroke-width="1.4" opacity="0.8"/>
-      <circle cx="12" cy="12" r="2" fill="none" stroke="currentColor" stroke-width="1.8"/>
-      <path d="M16.1 5.3a8 8 0 0 1 2.6 2.6M5.3 16.1a8 8 0 0 0 2.6 2.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path fill="currentColor" d="M13 19h1a1 1 0 0 1 1 1h7v2h-7a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1H2v-2h7a1 1 0 0 1 1-1h1v-2H4a1 1 0 0 1-1-1v-4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-7zM4 3h16a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m5 4h1V5H9zm0 8h1v-2H9zM5 5v2h2V5zm0 8v2h2v-2z"/>
     {% when 'gitlab' %}
-      <path fill="currentColor" d="m23.6 9.59-.03-.09L20.3.98a.85.85 0 0 0-.34-.4.87.87 0 0 0-1.29.49l-2.2 6.75H7.54L5.33 1.07a.86.86 0 0 0-.29-.44.87.87 0 0 0-1.34.35L.43 9.5l-.03.09a6.07 6.07 0 0 0 2.01 7.01l.04.03 4.98 3.73 2.46 1.86 1.5 1.13a1 1 0 0 0 1.22 0l1.5-1.13 2.46-1.86 5.01-3.75.01-.01a6.07 6.07 0 0 0 2.01-7.01Z"/>
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path fill="currentColor" d="m21.94 13.11l-1.05-3.22c0-.03-.01-.06-.02-.09l-2.11-6.48a.86.86 0 0 0-.8-.57c-.36 0-.68.25-.79.58l-2 6.17H8.84L6.83 3.33a.85.85 0 0 0-.79-.58c-.37 0-.69.25-.8.58L3.13 9.82v.01l-1.07 3.28c-.16.5.01 1.04.44 1.34l9.22 6.71c.17.12.39.12.56-.01l9.22-6.7c.43-.3.6-.84.44-1.34M8.15 10.45l2.57 7.91l-6.17-7.91m8.73 7.92l2.47-7.59l.1-.33h3.61l-5.59 7.16m4.1-13.67l1.81 5.56h-3.62m-1.3.95l-1.79 5.51L12 19.24l-2.86-8.79M6.03 3.94L7.84 9.5H4.23m-1.18 4.19c-.09-.07-.13-.19-.09-.29l.79-2.43l5.82 7.45m11.38-4.73l-6.51 4.73l.02-.03l5.79-7.42l.79 2.43c.04.1 0 .22-.09.29"/>
     {% when 'github' %}
       <path fill="currentColor" d="M12 .3C5.37.3 0 5.67 0 12.3c0 5.3 3.44 9.8 8.2 11.38.6.12.82-.26.82-.58 0-.28-.01-1.04-.02-2.04-3.33.72-4.04-1.61-4.04-1.61-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.81 1.3 3.5 1 .1-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.14-.3-.54-1.52.1-3.18 0 0 1.01-.32 3.3 1.23.96-.27 1.98-.4 3-.4s2.04.13 3 .4c2.28-1.55 3.29-1.23 3.29-1.23.64 1.66.24 2.88.12 3.18.76.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.47 5.92.42.36.81 1.1.81 2.22 0 1.61-.02 2.9-.02 3.29 0 .32.21.69.83.57A12 12 0 0 0 24 12.3C24 5.67 18.63.3 12 .3Z"/>
     {% when 'calendar', 'calendar-alt' %}
       <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M5 4h14a2 2 0 0 1 2 2v13H3V6a2 2 0 0 1 2-2Zm-2 5h18M8 2v4m8-4v4M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01M16 17h.01"/>
+    {% when 'activities' %}
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <g fill="none">
+        <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M14 22h-4c-3.771 0-5.657 0-6.828-1.172S2 17.771 2 14v-2c0-3.771 0-5.657 1.172-6.828S6.229 4 10 4h4c3.771 0 5.657 0 6.828 1.172S22 8.229 22 12v2c0 3.771 0 5.657-1.172 6.828c-.653.654-1.528.943-2.828 1.07M7 4V2.5M17 4V2.5M21.5 9H10.75M2 9h3.875"/>
+        <path fill="currentColor" d="M18 17a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m-5 4a1 1 0 1 1-2 0a1 1 0 0 1 2 0m0-4a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/>
+      </g>
     {% when 'users' %}
-      <path fill="currentColor" transform="translate(0 3.3) scale(.0375)" d="M320 0C377 0 424 47 424 104C424 161 377 208 320 208C263 208 216 161 216 104C216 47 263 0 320 0ZM96 72C136 72 168 104 168 144C168 184 136 216 96 216C56 216 24 184 24 144C24 104 56 72 96 72ZM0 400C0 329 57 272 128 272C141 272 153 274 165 277C132 314 112 363 112 416V432C112 443 114 454 119 464H32C14 464 0 450 0 432V400ZM521 464C526 454 528 443 528 432V416C528 363 508 314 475 277C487 274 499 272 512 272C583 272 640 329 640 400V432C640 450 626 464 608 464H521ZM472 144C472 104 504 72 544 72C584 72 616 104 616 144C616 184 584 216 544 216C504 216 472 184 472 144ZM160 416C160 328 232 256 320 256C408 256 480 328 480 416V432C480 450 466 464 448 464H192C174 464 160 450 160 432V416Z"/>
+      <path d="M0 0h15v16H0z" fill="none"/>
+      <path fill="currentColor" d="M7.5 7a2.5 2.5 0 0 1 0-5a2.5 2.5 0 0 1 0 5m0-4C6.67 3 6 3.67 6 4.5S6.67 6 7.5 6S9 5.33 9 4.5S8.33 3 7.5 3"/>
+      <path fill="currentColor" d="M13.5 11c-.28 0-.5-.22-.5-.5s.22-.5.5-.5s.5-.22.5-.5A2.5 2.5 0 0 0 11.5 7h-1c-.28 0-.5-.22-.5-.5s.22-.5.5-.5c.83 0 1.5-.67 1.5-1.5S11.33 3 10.5 3c-.28 0-.5-.22-.5-.5s.22-.5.5-.5A2.5 2.5 0 0 1 13 4.5c0 .62-.22 1.18-.6 1.62c1.49.4 2.6 1.76 2.6 3.38c0 .83-.67 1.5-1.5 1.5m-12 0C.67 11 0 10.33 0 9.5c0-1.62 1.1-2.98 2.6-3.38c-.37-.44-.6-1-.6-1.62A2.5 2.5 0 0 1 4.5 2c.28 0 .5.22.5.5s-.22.5-.5.5C3.67 3 3 3.67 3 4.5S3.67 6 4.5 6c.28 0 .5.22.5.5s-.22.5-.5.5h-1A2.5 2.5 0 0 0 1 9.5c0 .28.22.5.5.5s.5.22.5.5s-.22.5-.5.5m9 3h-6c-.83 0-1.5-.67-1.5-1.5v-1C3 9.57 4.57 8 6.5 8h2c1.93 0 3.5 1.57 3.5 3.5v1c0 .83-.67 1.5-1.5 1.5m-4-5A2.5 2.5 0 0 0 4 11.5v1c0 .28.22.5.5.5h6c.28 0 .5-.22.5-.5v-1A2.5 2.5 0 0 0 8.5 9z"/>
     {% when 'table' %}
       <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 4h16v16H4zM4 9h16M10 4v16"/>
+    {% when 'maintenance' %}
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path fill="currentColor" d="M4 20q-.825 0-1.412-.587T2 18V6q0-.825.588-1.412T4 4h16q.825 0 1.413.588T22 6v12q0 .825-.587 1.413T20 20zm0-2h10.5v-3.5H4zm12.5 0H20V9h-3.5zM4 12.5h10.5V9H4z"/>
     {% when 'circle-info' %}
       <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/>
       <path fill="currentColor" d="M11 10h2v7h-2zm0-3h2v2h-2z"/>
     {% when 'link' %}
-      <path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="m9 15 6-6m-4-3 .46-.54a5 5 0 0 1 7.08 7.08l-.54.46M13 18l-.4.53a5.07 5.07 0 0 1-7.13 0 4.97 4.97 0 0 1 0-7.07l.53-.46"/>
+      <path d="M0 0h24v24H0z" fill="none"/>
+      <path fill="none" stroke="currentColor" stroke-dasharray="28" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 6l2 -2c1 -1 3 -1 4 0l1 1c1 1 1 3 0 4l-5 5c-1 1 -3 1 -4 0M11 18l-2 2c-1 1 -3 1 -4 0l-1 -1c-1 -1 -1 -3 0 -4l5 -5c1 -1 3 -1 4 0">
+        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.6s" values="28;0"/>
+      </path>
     {% when 'rss', 'square-rss' %}
       <path fill="currentColor" d="M4 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-2-7v3c4.97 0 9 4.03 9 9h3c0-6.63-5.37-12-12-12Zm0-7v3c8.84 0 16 7.16 16 16h3C21 13.4 13.6 4 2 4Z"/>
     {% when 'address-card' %}

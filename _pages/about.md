@@ -1,8 +1,12 @@
 ---
-title: "关于"
+title: "LUG@About"
 permalink: /about/
 layout: single
 author_profile: true
+header:
+  overlay_color: "#0a4a83"
+  overlay_filter: "0.2"
+  overlay_image: /assets/images/splash-bg.svg
 ---
 
 

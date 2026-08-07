@@ -1,0 +1,38 @@
+html,
+body {
+  background: #f4f7fa;
+}
+
+.page-loader {
+  position: fixed;
+  z-index: 10000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #f4f7fa;
+  color: #0a4a83;
+  opacity: 1;
+  transition: opacity 0.18s ease, visibility 0.18s ease;
+}
+
+.page-loader svg {
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+html.no-js .page-loader,
+body.is-page-ready .page-loader {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-loader {
+    transition: none;
+  }
+
+  .page-loader animate {
+    display: none;
+  }
+}

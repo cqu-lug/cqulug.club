@@ -1,5 +1,5 @@
 ---
-title: "LUG 新闻"
+title: "LUG@News"
 layout: home
 permalink: /news/
 header:

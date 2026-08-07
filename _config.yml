@@ -11,7 +11,7 @@ description            : "重庆大学 Linux 用户协会"
 url                    : "https://cqulug.club"
 baseurl                : ""
 repository             : "cqu-lug/cqulug.club"
-logo                   : "/assets/images/logo-40.png"
+logo                   : "/assets/images/favicon.ico"
 breadcrumbs            : true
 search                 : true
 og_image               : /assets/images/og-image.png

@@ -10,7 +10,7 @@
   <link href="{{ feed_path | absolute_url }}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
 {% endunless %}
 
-<link rel="icon" href="{{ '/assets/images/logo-40.png' | relative_url }}" type="image/png" sizes="40x40">
+<link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}" type="image/x-icon" sizes="any">
 
 {%- comment %} https://docs.google.com/presentation/d/1rmxwWa9P6_xHqonmh5ONXRS-jPc5XKbnv99Rjkhe04s/present {% endcomment -%}
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,6 +27,7 @@
 {% endif %}
 
 <!-- For all browsers -->
+<link rel="stylesheet" href="{{ '/assets/css/page-loader.css' | relative_url }}">
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
 {% if site.head_scripts %}

@@ -1,5 +1,5 @@
 ---
-title: "LUG Wiki"
+title: "LUG@Wiki"
 layout: single
 permalink: /wiki/
 header:

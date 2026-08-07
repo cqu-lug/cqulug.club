@@ -66,6 +66,7 @@
     if (!campusUrl || !offcampusUrl) return;
 
     activeTrigger = trigger;
+    trigger.setAttribute('aria-expanded', 'true');
     renderChoices(campusUrl, offcampusUrl);
     modal.hidden = false;
     document.body.classList.add('is-modal-open');
@@ -79,6 +80,7 @@
     setPageInert(false);
     actions.replaceChildren();
     if (activeTrigger) {
+      activeTrigger.setAttribute('aria-expanded', 'false');
       activeTrigger.focus();
       activeTrigger = null;
     }
