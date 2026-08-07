@@ -8,13 +8,13 @@ title_separator        : "-"
 subtitle               : "Chongqing University Linux User Group"
 name                   : "LUG @ CQU"
 description            : "重庆大学 Linux 用户协会"
-url                    : # "https://cqu-lug.github.io"
-baseurl                : # "/cqu-lug"
-repository             : # "username/repo-name"
-logo                   : "/assets/images/favicon.ico"
+url                    : "https://cqulug.club"
+baseurl                : ""
+repository             : "cqu-lug/cqulug.club"
+logo                   : "/assets/images/logo-40.png"
 breadcrumbs            : true
 search                 : true
-og_image               : /assets/images/splash-bg.svg
+og_image               : /assets/images/og-image.png
 
 # Site Author
 author:
@@ -23,7 +23,7 @@ author:
   location         : "重庆，中国"
   links:
     - label: "GitHub"
-      icon: "fab fa-fw fa-github"
+      icon: "github"
       url: "https://github.com/cqu-lug"
 
 # Site Footer

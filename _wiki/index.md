@@ -7,6 +7,7 @@ header:
   overlay_filter: "0.2"
   overlay_image: /assets/images/splash-bg.svg
 author_profile: false
+excerpt: "重庆大学 Linux 用户协会文档目录"
 ---
 
 {% assign wiki_pages = site.wiki | sort: "title" %}

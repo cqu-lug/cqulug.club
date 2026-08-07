@@ -1,0 +1,12 @@
+{% assign locale = include.locale | default: site.locale %}
+{% if site.category_archive.path %}
+  {% assign categories_sorted = page.categories | sort_natural %}
+  <p class="page__taxonomy">
+    <strong>{% include icon.html name="folder-open" %} {{ site.data.ui-text[locale].categories_label | default: "分类：" }} </strong>
+    <span itemprop="keywords">
+    {% for category_word in categories_sorted %}
+      <a href="{{ category_word | slugify | prepend: '#' | prepend: site.category_archive.path | relative_url }}" class="page__taxonomy-item p-category" rel="tag">{{ category_word }}</a>{% unless forloop.last %}<span class="sep">, </span>{% endunless %}
+    {% endfor %}
+    </span>
+  </p>
+{% endif %}

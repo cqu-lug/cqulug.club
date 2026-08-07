@@ -6,7 +6,7 @@ layout: single
 ---
 我们欢迎重庆大学的计算机技术爱好者、自由/开源软件爱好者、GNU/Linux 用户。
 
-注：[向 LUG@CQU 的公开项目贡献，或者参加的公开活动](/activity)，并不需要以加入 LUG@CQU 为前提。
+注：[向 LUG@CQU 的公开项目贡献，或者参加的公开活动](/activities/)，并不需要以加入 LUG@CQU 为前提。
 
 ## 加入 QQ 群（其他协议的群组 TODO）
 

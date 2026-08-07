@@ -1,0 +1,12 @@
+{% assign locale = include.locale | default: site.locale %}
+{% if site.tag_archive.path %}
+  {% assign tags_sorted = page.tags | sort_natural %}
+  <p class="page__taxonomy">
+    <strong>{% include icon.html name="tags" %} {{ site.data.ui-text[locale].tags_label | default: "标签：" }} </strong>
+    <span itemprop="keywords">
+    {% for tag_word in tags_sorted %}
+      <a href="{{ tag_word | slugify | prepend: '#' | prepend: site.tag_archive.path | relative_url }}" class="page__taxonomy-item p-category" rel="tag">{{ tag_word }}</a>{% unless forloop.last %}<span class="sep">, </span>{% endunless %}
+    {% endfor %}
+    </span>
+  </p>
+{% endif %}
